@@ -11,7 +11,7 @@ This repository contains source code(Pytorch) for CLariQ competition.
 
 ### docker utilization
 
-1, activate docker container
+1, get docker container
 
 ```
 docker pull ky941122/tal_ml_clariq:v1
@@ -24,10 +24,15 @@ conda activate clariq
 ```
 
 3, If docker runs into any problems, set up the following environment.
+
 cuda=10.1
+
 numpy==1.19.3
+
 pandas==1.1.4
+
 torch==1.7.0+cu101
+
 
 ### run python code
 
@@ -35,13 +40,13 @@ torch==1.7.0+cu101
 ```
 cd ./TAL_ClariQ/ClariQ/
 
-python write_test_file -task=test -multi_turn_request_file_path={absolut path for dev file} -output_run_file={path for output file} -topk=100 -batch_size=100
+python write_test_file -multi_turn_request_file_path={absolut path for dev file} -output_run_file={path for output file} -topk=100 -batch_size=100
 
 for example:
-python write_test_file -task=test -multi_turn_request_file_path=./processed_data/little_dev.pkl -output_run_file=./processed_data/dev_run_files -topk=100 -batch_size=100
+python write_test_file -multi_turn_request_file_path=./processed_data/little_dev.pkl -output_run_file=./processed_data/dev_run_files -topk=100 -batch_size=100
 ```
 
-You'll get the ranking results on the validation set under the given folder. If you meet OOM error, you can control the "-batch_size" parameter, make it smaller.
+You'll get the ranking results on the validation set under the given folder. If you meet OOM error, you can control the "-batch_size" parameter, make it smaller, default batch_size is set to 300.
 
 
 2, Callable .py file for one input_dict
