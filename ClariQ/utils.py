@@ -8,7 +8,7 @@ import numpy as np
 import os
 import torch
 
-def concat_input(request, context,max_word=60):
+def concat_input(request, context,max_word=81):
     one_text = '<sos> ' + request.lower()
     if len(context) == 0:
         pass
