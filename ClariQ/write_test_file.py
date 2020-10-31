@@ -183,25 +183,42 @@ def write_test_file(multi_turn_request_file_path, output_run_file, topk=100):
                 f.write('{} 0 "{}" {} {} CMAN_multi_turn\n'.format(ctx_id, _qid, _i, len(_preds)-_i))
 
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-task',
+                    dest='eval_task',
+                    type=str,
+                    help='task for running'
+                    default='test')
+    parser.add_argument(
+        '-multi_turn_request_file_path',
+        type=str, 
+        help = 'test file path',
+        required=True)
+    parser.add_argument(
+        '-output_run_file',
+        type=str, 
+        help = 'run file path, we write the model output in this file',
+        required=True)
+    parser.add_argument(
+        '-topk',
+        type=int, 
+        help = 'return topk number of questions',
+        default=100)
+    opt = parser.parse_args()
+    write_test_file(opt.multi_turn_request_file_path, opt.output_run_file, opt.topk)
+
+
+
 if __name__ == "__main__":
     # example()
-    case_0 = {'topic_id': 293,
-        'facet_id': 'F0729',
-        'initial_request': 'Tell me about the educational advantages of social networking sites.',
-        'question': 'which social networking sites would you like information on',
-        'answer': 'i don have a specific one in mind just overall educational benefits to social media sites',
-        'conversation_context': [
-            {'question': 'what level of schooling are you interested in gaining the advantages to social networking sites',
-            'answer': 'all levels'},
-            {'question': 'what type of educational advantages are you seeking from social networking',
-            'answer': 'i just want to know if there are any'}
-        ]
-    }
-    print(query_one_dict(case_0))
-
+    cmd = "python write_test_file.py -task=test -multi_turn_request_file_path='./processed_data/little_dev.pkl \
+        -output_run_file=./processed_data/run_file_dev -topk=10"
+    os.system(cmd)
     # multi_turn_request_file_path = "/share/Tianqiao_Liu/clairQ/processed_data/little_dev.pkl"
     # output_run_file = "/share/Tianqiao_Liu/clairQ/processed_data/run_file_dev"
     # write_test_file(multi_turn_request_file_path, output_run_file, 10)
+
 
 
 
