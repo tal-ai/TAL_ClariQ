@@ -33,7 +33,7 @@ for one_que in question_bank.question.tolist():
 converted_lower_questions = convert_insts_to_num(lower_questions, vocabulary)
 
 # load model
-model_path = os.path.join(os.path.dirname(__file__), "saved_model","CMAN3.chkpt")
+model_path = os.path.join(os.path.dirname(__file__), "saved_model","qiaonet_3.chkpt")
 emb_path = os.path.join(os.path.dirname(__file__), "processed_data","pretrained_emb.pt")
 pretrained_emb = torch.load(emb_path)
 model = MwAN_trans(
