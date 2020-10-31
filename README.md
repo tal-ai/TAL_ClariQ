@@ -14,6 +14,19 @@ See more detail in paper:
 1, The approximate running time is 2 hours, since we only have the V100 GPU for testing, there may be a discrepancy in the total running time.
 
 2, Document relevance score for dev set:
+```
+NDCG1: 0.22661954068764104
+NDCG3: 0.20740563773647339
+NDCG5: 0.20241540875297784
+NDCG10: 0.18973210299160412
+NDCG20: 0.17328878793208852
+P1: 0.28142838178680474
+P3: 0.24746670206646312
+P5: 0.23346608257002524
+P10: 0.2015531660692951
+P20: 0.15672043010752687
+MRR100: 0.36629474494004755
+```
 
 ## Running steps
 
