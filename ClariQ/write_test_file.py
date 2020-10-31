@@ -64,7 +64,7 @@ class ClariQ:
         pred_prob = pred_res.cpu().numpy()
         return pred_prob
 
-    def forward(self, input_dict, batch_size=1000):
+    def forward(self, input_dict, batch_size):
         request = input_dict['initial_request']
         context = input_dict['conversation_context']
         input_left = concat_input(request, context)
@@ -100,7 +100,7 @@ def example():
     print("time: %0.4f ms" % ((t1 - t0) * 1000))
 
 
-def query_one_dict(input_dict):
+def query_one_dict(input_dict, batch_size=1000):
     """
     input:
         type: dict
@@ -126,14 +126,14 @@ def query_one_dict(input_dict):
         q_res_id = 'Q00001'
         response = qid_to_text['Q00001']
     else:
-        pred_qid = cq_query.forward(input_dict)
+        pred_qid = cq_query.forward(input_dict, batch_size)
         real_preds = select_no_duplicate_questions(pred_qid[:10], input_dict['conversation_context'], qid_to_text)
         # q_list = qid_to_question(real_preds, qid_to_text) # return top one from the pred
         response = real_preds[0]
     return response
 
 
-def write_test_file(multi_turn_request_file_path, output_run_file, topk=100):
+def write_test_file(multi_turn_request_file_path, output_run_file, topk=100, batch_size=1000):
     """
     input:
         multi_turn_request_file_path
@@ -169,7 +169,7 @@ def write_test_file(multi_turn_request_file_path, output_run_file, topk=100):
         input_dict = test[rec_id]
         ctx_id = input_dict['context_id']
         if ctx_id not in test_query_res:
-            pred_qid = cq_query.forward(input_dict)
+            pred_qid = cq_query.forward(input_dict, batch_size)
             # q_list = qid_to_question(pred_qid, qid_to_text)
             # test_query_res[ctx_id] = q_list
             # real_preds = select_no_duplicate_questions(pred_qid[:topk], input_dict['conversation_context'], qid_to_text)
@@ -206,8 +206,13 @@ def main():
         type=int, 
         help = 'return topk number of questions',
         default=100)
+    parser.add_argument(
+        '-batch_size',
+        type=int, 
+        help = 'batch size, if OOM, lower the batch size',
+        default=100)
     opt = parser.parse_args()
-    write_test_file(opt.multi_turn_request_file_path, opt.output_run_file, opt.topk)
+    write_test_file(opt.multi_turn_request_file_path, opt.output_run_file, opt.topk, opt.batch_size)
 
 
 
