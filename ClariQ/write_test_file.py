@@ -10,6 +10,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from utils import *
+import argparse
 from model.CMAN import MwAN_trans
 # import math, copy, time
 # import heapq, copy
@@ -188,7 +189,7 @@ def main():
     parser.add_argument('-task',
                     dest='eval_task',
                     type=str,
-                    help='task for running'
+                    help='task for running',
                     default='test')
     parser.add_argument(
         '-multi_turn_request_file_path',
@@ -212,9 +213,9 @@ def main():
 
 if __name__ == "__main__":
     # example()
-    cmd = "python write_test_file.py -task=test -multi_turn_request_file_path='./processed_data/little_dev.pkl \
-        -output_run_file=./processed_data/run_file_dev -topk=10"
-    os.system(cmd)
+    # cmd = "python write_test_file.py -task=test -multi_turn_request_file_path=./processed_data/little_dev.pkl -output_run_file=./processed_data/run_file_dev -topk=10"
+    # os.system(cmd)
+    main()
     # multi_turn_request_file_path = "/share/Tianqiao_Liu/clairQ/processed_data/little_dev.pkl"
     # output_run_file = "/share/Tianqiao_Liu/clairQ/processed_data/run_file_dev"
     # write_test_file(multi_turn_request_file_path, output_run_file, 10)
