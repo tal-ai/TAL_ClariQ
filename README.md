@@ -2,6 +2,14 @@
 
 This repository contains source code(Pytorch) for CLariQ competition.
 
+Team name: TAL ML Team
+
+Model name: CMAN++
+
+See more detail in paper: 
+[Automatic Short Answer Grading via Multiway Attention Networks. AIED (2) 2019: 169-173](https://arxiv.org/abs/1909.10166#:~:text=Automatic%20Short%20Answer%20Grading%20via%20Multiway%20Attention%20Networks,-Tiaoqiao%20Liu%2C%20Wenbiao&text=Automatic%20short%20answer%20grading%20(ASAG,monotonous%20and%20tedious%20grading%20workloads.)
+
+
 ## Note
 1, The approximate running time is 2 hours, since we only have the V100 GPU for testing, there may be a discrepancy in the total running time.
 
